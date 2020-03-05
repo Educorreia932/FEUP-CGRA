@@ -38,21 +38,25 @@ class MyScene extends CGFscene {
         this.displaySmallTriangle = true;
         this.scaleFactor = 1;
     }
+    
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -82,9 +86,6 @@ class MyScene extends CGFscene {
                                 0.0, 1.0, 0.0, 0.0,
                                 0.0, 0.0, 1.0, 0.0,
                                 1.5, 2.5, 0.0, 1.0];
-                                
-        
-        
 
         // ---- BEGIN Primitive drawing section
         
@@ -99,40 +100,56 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate((Math.sqrt(2)-1) + 0.6, -(Math.sqrt(2) + 1) + 0.6 , 0);
         this.rotate(Math.PI, 0, 0, 1);
+
         if(this.displayTriangle)
             this.triangle.display();
+
         this.popMatrix();    
             
+        this.pushMatrix();
+        this.scale(1, -1, 1);
+        this.translate(-2, -0.3, 0);
+        this.rotate(Math.PI * 4 / 7, 0, 0, 1);
+
         if(this.displayParalel)
             this.paralel.display();
+
+        this.popMatrix();  
 
         this.pushMatrix();
         this.translate(2.5, 3.5, 0);
         this.rotate(Math.PI, 0, 0, 1);
+
         if(this.displaySmallTriangle)
             this.smallTri.display();
+
         this.popMatrix();
 
         this.pushMatrix();
         this.translate(-0.6 - (Math.sqrt(2)- 1), -0.6 - Math.sqrt(2.0), 0);
         this.rotate(Math.PI/2.0, 0, 0, 1);
+        
         if(this.displaySmallTriangle)
             this.smallTri2.display();
+        
         this.popMatrix();
-
   
         this.pushMatrix();
         this.translate(0.6,0.6,0);
         this.rotate(-135.0 * Math.PI / 180.0, 0, 0, 1);    
+        
         if(this.displayBigTriangle)
             this.bigTri.display();
+        
         this.popMatrix();
 
         this.pushMatrix();
         this.translate(-0.6,-0.6,0);
         this.rotate(45.0 * Math.PI / 180.0, 0, 0, 1);    
-        if(this.displayBigTriangle)
+
+        if (this.displayBigTriangle)
             this.bigTri2.display();
+        
         this.popMatrix();
 
         // ---- END Primitive drawing section
