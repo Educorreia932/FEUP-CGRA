@@ -72,7 +72,7 @@ class MyScene extends CGFscene {
 
         this.multMatrix(sca);
 
-        if (this.displayTrangram = true)
+        if (this.displayTrangram)
             this.tangram.display();
 
         // ---- END Primitive drawing section
