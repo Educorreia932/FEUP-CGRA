@@ -79,9 +79,9 @@ class MyTangram extends CGFobject {
 
     enableNormalViz = function enameNormalViz() {
         this.diamond.enableNormalViz();
-        // paralellogram.enableNormalViz();
-        // triangle.enableNormalViz();
-        // trianglesmall.enableNormalViz();
-        // trianglebig.enableNormalViz(); 
+        this.paralellogram.enableNormalViz();
+        this.triangle.enableNormalViz();
+        this.trianglesmall.enableNormalViz();
+        this.trianglebig.enableNormalViz(); 
     }
 }
