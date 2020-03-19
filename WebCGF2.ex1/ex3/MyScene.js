@@ -59,12 +59,12 @@ class MyScene extends CGFscene {
         this.lights[1].setVisible(true);
         this.lights[1].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
 
-    hexToRgbA(hex)
-    {
+    hexToRgbA(hex) {
         var ret;
         //either we receive a html/css color or a RGB vector
         if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -99,7 +99,6 @@ class MyScene extends CGFscene {
         this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
     }
 
-
     initMaterials() {
         // Red Ambient (no diffuse, no specular)
         this.material1 = new CGFappearance(this);
@@ -122,6 +121,13 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        // Wood
+        this.material4 = new CGFappearance(this);
+        this.material4.setAmbient(0.63, 0.32, 0.18, 1.0);
+        this.material4.setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.material4.setSpecular(0.1, 0.1, 0.1, 0.1);
+        this.material4.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -136,10 +142,10 @@ class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.material4, this.customMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood': 3, 'Custom': 4};
     }
     
     display() {
