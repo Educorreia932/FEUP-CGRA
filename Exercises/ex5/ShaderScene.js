@@ -57,6 +57,20 @@ class ShaderScene extends CGFscene {
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
 
+		this.waterappearance = new CGFappearance(this);
+
+		this.waterappearance.setAmbient(0.3, 0.3, 0.3, 1);
+		this.waterappearance.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.waterappearance.setSpecular(0.0, 0.0, 0.0, 1);
+		this.waterappearance.setShininess(120);
+
+		this.texture3 = new CGFtexture(this, "textures/waterTex.jpg");
+
+		this.waterappearance.setTexture(this.texture3);
+		this.waterappearance.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.texture4 = new CGFtexture(this, "textures/waterMap.jpg");
+
 		// shaders initialization
 
 		this.testShaders = [
@@ -70,7 +84,8 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/blueYellow.vert", "shaders/blueYellow.frag"),
-			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayscale.frag")
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayscale.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -78,7 +93,8 @@ class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
-
+		this.testShaders[11].setUniformsValues({ uSampler2: 2 });
+		this.testShaders[11].setUniformsValues({ timeFactor : 0 });
 
 		// Shaders interface variables
 
@@ -93,7 +109,8 @@ class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Blue Yellow': 9,
-			'Grayscale': 10
+			'Grayscale': 10,
+			'Water': 11
 		};
 
 		// shader code panels references
@@ -105,7 +122,6 @@ class ShaderScene extends CGFscene {
 
 		this.onShaderCodeVizChanged(this.showShaderCode);
 		this.onSelectedShaderChanged(this.selectedExampleShader);
-
 
 		// set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
@@ -119,7 +135,6 @@ class ShaderScene extends CGFscene {
 	
 	// initialize lights
 	initLights() {
-
 		if (this.lights.length > 0) {
 			this.lights[0].setPosition(0, 0, 10, 1);
 			this.lights[0].setAmbient(0.2, 0.2, 0.2, 1);
@@ -175,6 +190,8 @@ class ShaderScene extends CGFscene {
 		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		if(this.selectedExampleShader == 11)
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 1000});
 	}
 
 	// main display function
@@ -182,7 +199,6 @@ class ShaderScene extends CGFscene {
 		// Clear image and depth buffer every time we update the scene
 		this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-
 
 		// Initialize Model-View matrix as identity (no transformation)
 		this.updateProjectionMatrix();
@@ -197,8 +213,12 @@ class ShaderScene extends CGFscene {
 		// Draw axis
 		this.axis.display();
 
-		// aplly main appearance (including texture in default texture unit 0)
-		this.appearance.apply();
+		// aplly main appearance (including 	ure in default texture unit 0)
+		if (this.selectedExampleShader != 11)
+			this.appearance.apply();
+
+		else
+			this.waterappearance.apply();
 
 		// activate selected shader
 		this.setActiveShader(this.testShaders[this.selectedExampleShader]);
@@ -206,6 +226,8 @@ class ShaderScene extends CGFscene {
 
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
+
+		this.texture4.bind(2);
 
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)
@@ -219,8 +241,14 @@ class ShaderScene extends CGFscene {
 	
 			this.popMatrix();
 		}
+
 		else {
 			this.pushMatrix();
+
+			//Making the waterMap repeat
+			var repeatWaterMap = this.texture3.gl;
+			repeatWaterMap.texParameteri(repeatWaterMap.TEXTURE_2D, repeatWaterMap.TEXTURE_WRAP_T, repeatWaterMap.REPEAT);
+			repeatWaterMap.texParameteri(repeatWaterMap.TEXTURE_2D, repeatWaterMap.TEXTURE_WRAP_S, repeatWaterMap.REPEAT);
 			
 			this.scale(25, 25, 25);
 			this.objects[1].display();
