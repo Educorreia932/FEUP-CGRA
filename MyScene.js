@@ -36,6 +36,8 @@ class MyScene extends CGFscene {
              new MySphere(this, 16, 8)
          ];
 
+        this.cubeMap = new MyCubeMap(this);
+
         this.objectList = {
 			'Cylinder': 0,
 			'Sphere': 1
@@ -97,8 +99,12 @@ class MyScene extends CGFscene {
         if(this.selectedObject == 1) {
             this.appearance.apply();
         }
-
         this.objects[this.selectedObject].display();
+
+        this.pushMatrix();
+        this.scale(50, 50, 50);
+        this.cubeMap.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
