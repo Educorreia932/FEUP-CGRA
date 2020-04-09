@@ -5,10 +5,10 @@ class MyCylinder extends CGFobject {
      * @param  {integer} slices - number of slices around Y axis
      */
     constructor(scene, slices) {
-      super(scene);
-      this.nDivs = slices;
-  
-      this.initBuffers();
+		super(scene);
+		this.nDivs = slices;
+	
+		this.initBuffers();
     }
   
     /**
@@ -17,38 +17,39 @@ class MyCylinder extends CGFobject {
      * TODO: DEFINE TEXTURE COORDINATES
      */
     initBuffers() {
-      this.vertices = [];
-      this.indices = [];
-      this.normals = [];
-      this.texCoords = [];
-  
-      var phi = 0;
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
+	
+		var phi = 0;
 
-      var phiInc = (Math.PI * 2) / this.nDivs;
+		var phiInc = (Math.PI * 2) / this.nDivs;
 
-      var vertex = 0;
-      for (let div = 0; div <= this.nDivs; div++) {
-        var sinPhi = Math.sin(phi);
-        var cosPhi = Math.cos(phi);
-        var x = cosPhi;
-        var z = sinPhi;
-        this.vertices.push(x, -0.5, z);
-        this.vertices.push(x, 0.5, z);
+		var vertex = 0;
+	  
+      	for (let div = 0; div <= this.nDivs; div++) {
+			var sinPhi = Math.sin(phi);
+			var cosPhi = Math.cos(phi);
+			var x = cosPhi;
+			var z = sinPhi;
+			this.vertices.push(x, -0.5, z);
+			this.vertices.push(x, 0.5, z);
 
-        if (div < this.nDivs) {
-            this.indices.push( vertex, vertex + 1, vertex + 2);
-            this.indices.push( vertex + 3, vertex + 2, vertex + 1);
-            
-            vertex += 2;
-        }
-        this.normals.push(cosPhi, 0, sinPhi);
-        this.normals.push(cosPhi, 0, sinPhi);
-        phi += phiInc;
-      }
+			if (div < this.nDivs) {
+				this.indices.push( vertex, vertex + 1, vertex + 2);
+				this.indices.push( vertex + 3, vertex + 2, vertex + 1);
+				
+				vertex += 2;
+			}
+
+			this.normals.push(cosPhi, 0, sinPhi);
+			this.normals.push(cosPhi, 0, sinPhi);
+			phi += phiInc;
+      	}
   
-  
-      this.primitiveType = this.scene.gl.TRIANGLES;
-      this.initGLBuffers();
+		this.primitiveType = this.scene.gl.TRIANGLES;
+		this.initGLBuffers();
     }
 
     updateBuffers(nSlices){
@@ -58,5 +59,5 @@ class MyCylinder extends CGFobject {
         this.initBuffers();
         this.initNormalVizBuffers();
     }
-  }
+}
   
