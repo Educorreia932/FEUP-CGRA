@@ -33,14 +33,16 @@ class MyScene extends CGFscene {
 
          this.objects = [
              new MyCylinder(this, 6),
-             new MySphere(this, 16, 8)
+             new MySphere(this, 16, 8),
+             new MyVehicle(this)
          ];
 
         this.cubeMap = new MyCubeMap(this);
 
         this.objectList = {
 			'Cylinder': 0,
-			'Sphere': 1
+            'Sphere': 1,
+            'Vehicle' : 2
         }
 
         this.appearance = new CGFappearance(this);
