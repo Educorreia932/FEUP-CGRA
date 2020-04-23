@@ -5,12 +5,14 @@
 class MyVehicle extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.mesh = new MyPyramid(scene, 3, 1);
+        //this.mesh = new MyPyramid(scene, 3, 1);
+        this.ellipsoid = new MyEllipsoid(scene, 50, 50);
         this.pos = vec3.fromValues(0.0,0.0,0.0); //x, y, z
         this.velocity = 0.0;
         this.direction = 0.0;
         this.speedFactor = 1.5;
         this.vehicleFriction = false;
+        this.scaleFactor = 1.0;
     }
 
     initBuffers() {
@@ -48,11 +50,14 @@ class MyVehicle extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2, 1, 0, 0);     
-        this.scene.translate(this.pos[0], this.pos[2], -this.pos[1]);
-        this.scene.rotate(this.direction, 0, 0, -1);
-        this.scene.translate(0, -0.5, 0);
-        this.mesh.display();
+        this.scene.translate(0, 10, 0);
+        //this.scene.rotate(Math.PI/2, 1, 0, 0);     
+        this.scene.translate(this.pos[0], -this.pos[1], this.pos[2]);
+        this.scene.rotate(this.direction, 0, 1, 0);
+        
+        //this.mesh.display();
+        this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.ellipsoid.display();
         this.scene.popMatrix();
     }
 }

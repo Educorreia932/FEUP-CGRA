@@ -22,7 +22,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene.vehicle, 'vehicleFriction').name('Apply Friction');
 
         this.gui.add(this.scene.vehicle, 'speedFactor', 0.1, 3.0).name('Speed Factor');
-        this.gui.add(this.scene, 'scaleFactor', 0.1, 3.0).name('Scale');
+        this.gui.add(this.scene.vehicle, 'scaleFactor', 0.1, 3.0).name('Vehicle Scale');
 
         this.gui.add(this.scene, 'numSlices').name('Number of Slices').onChange(this.scene.updateComplexity.bind(this.scene));
         this.gui.add(this.scene, 'selectedCube', this.scene.cubeIds).name('Selected Cube texture').onChange(this.scene.updateCubeTexture.bind(this.scene));

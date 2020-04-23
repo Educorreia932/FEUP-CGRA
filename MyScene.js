@@ -61,7 +61,6 @@ class MyScene extends CGFscene {
         this.numSlices = 6;
         this.cubeIds = { 'Montains': 0, 'Sky': 1};
         this.selectedCube = 0;
-        this.scaleFactor = 1.5;
         
     }
     initLights() {
@@ -148,10 +147,7 @@ class MyScene extends CGFscene {
         //}s
         //this.objects[this.selectedObject].display();
 
-        this.pushMatrix();
-        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.vehicle.display();
-        this.popMatrix();
 
         this.cubeMap.display();
 
