@@ -49,7 +49,7 @@ class MyCylinder extends CGFobject {
         this.normals.push(cosPhi, 0, sinPhi);
         this.normals.push(cosPhi, 0, sinPhi);
         phi += phiInc;
-        xCoord -= phiInc/(2*Math.PI);
+        xCoord += phiInc/(2*Math.PI);
       }
   
 		this.primitiveType = this.scene.gl.TRIANGLES;

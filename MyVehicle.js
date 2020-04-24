@@ -20,6 +20,17 @@ class MyVehicle extends CGFobject {
         this.propeller = new MyPropeller(scene);
 
         this.rudderAngle = 0;
+
+        this.material = new CGFappearance(this.scene);
+		this.material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.material.setShininess(10.0);
+        
+        this.balloonTexture = new CGFtexture(this.scene, "images/balloonTexture.jpg");
+        this.gondolaTexture = new CGFtexture(this.scene, "images/gondolaTexture.jpg");
+        this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
+		
     }
 
     initBuffers() {
@@ -71,19 +82,27 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
+        
         this.scene.pushMatrix();
 
         this.scene.translate(0, 10, 0);
         this.scene.translate(this.pos[0], -this.pos[1], this.pos[2]);
         this.scene.rotate(this.direction, 0, 1, 0);
         
+
+        //Balloon
         this.scene.pushMatrix();
         
+        this.material.setTexture(this.balloonTexture);
+        this.material.apply();
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor * 2);
         this.balloon.display();
 
         this.scene.popMatrix();
 
+        //Rudders
+        this.material.setTexture(this.rudderTexture);
+        this.material.apply();
         this.scene.pushMatrix();
 
         this.scene.translate(0, 0, -2);
@@ -109,9 +128,14 @@ class MyVehicle extends CGFobject {
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
         }
 
-
         this.scene.popMatrix();
 
+        //Gondola, propellers
+        this.scene.pushMatrix();
+        //this.scene.translate(0, -4, 0);
+        this.material.setTexture(this.gondolaTexture);
+        this.material.apply();
+        
         this.gondola.display();
 
         for (var i = 0; i < 2; i++) {
@@ -120,6 +144,7 @@ class MyVehicle extends CGFobject {
             this.propeller.display(i);
             this.scene.popMatrix();
         }
+        this.scene.popMatrix();
 
         this.scene.popMatrix();
     }

@@ -154,7 +154,6 @@ class MyCubeMap extends CGFobject {
         this.scene.scale(50, 50, 50);
         this.material.apply();
         super.display();
-
         this.scene.popMatrix();  
     }
 

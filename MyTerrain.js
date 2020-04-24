@@ -4,7 +4,7 @@ class MyTerrain extends CGFobject {
 		this.plane = new MyPlane(scene, 20, 0, 1, 0, 1);
 
         this.material = new CGFappearance(this.scene);	
-		
+                
         this.terrainTexture = new CGFtexture(this.scene, "textures/map1.png");
         this.material.setTexture(this.terrainTexture);
 
@@ -27,8 +27,5 @@ class MyTerrain extends CGFobject {
         this.scene.popMatrix(); 
         
         this.scene.setActiveShader(this.scene.defaultShader);
-
-       
-		
 	}
 }

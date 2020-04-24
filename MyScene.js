@@ -31,18 +31,17 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
-         this.objects = [
+        this.objects = [
              new MyCylinder(this, 6),
              new MySphere(this, 16, 8),
-         ];
-
-        this.cubeMap = new MyCubeMap(this);
+        ];
 
         this.objectList = {
 			'Cylinder': 0,
             'Sphere': 1,
         }
 
+        this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
 
@@ -156,8 +155,6 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         this.vehicle.display();
-
-        this.cubeMap.display();
 
         this.pushMatrix();
         this.translate(0, 0, 0);
