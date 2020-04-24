@@ -5,10 +5,10 @@ class MyCylinder extends CGFobject {
      * @param  {integer} slices - number of slices around Y axis
      */
     constructor(scene, slices) {
-      super(scene);
-      this.nDivs = slices;
-  
-      this.initBuffers();
+		super(scene);
+		this.nDivs = slices;
+	
+		this.initBuffers();
     }
   
     /**
@@ -17,14 +17,14 @@ class MyCylinder extends CGFobject {
      * TODO: DEFINE TEXTURE COORDINATES
      */
     initBuffers() {
-      this.vertices = [];
-      this.indices = [];
-      this.normals = [];
-      this.texCoords = [];
-  
-      var phi = 0;
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
+	
+		var phi = 0;
 
-      var phiInc = (Math.PI * 2) / this.nDivs;
+		var phiInc = (Math.PI * 2) / this.nDivs;
 
       var vertex = 0;
       var xCoord = 0.0;
@@ -52,9 +52,8 @@ class MyCylinder extends CGFobject {
         xCoord -= phiInc/(2*Math.PI);
       }
   
-  
-      this.primitiveType = this.scene.gl.TRIANGLES;
-      this.initGLBuffers();
+		this.primitiveType = this.scene.gl.TRIANGLES;
+		this.initGLBuffers();
     }
 
     updateBuffers(nSlices){
@@ -64,5 +63,5 @@ class MyCylinder extends CGFobject {
         this.initBuffers();
         this.initNormalVizBuffers();
     }
-  }
+}
   

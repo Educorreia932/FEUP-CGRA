@@ -4,8 +4,7 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 
 serialInclude(['../lib/CGF.js','MyScene.js', 'MyInterface.js', 'MySphere.js', 'MyCylinder.js', 'MyCubeMap.js', 'MyQuad.js', 'MyPyramid.js', 'MyVehicle.js','MyPlane.js','MyTerrain.js','MyEllipsoid.js',
 
-main=function()
-{
+main=function() {
     var app = new CGFapplication(document.body);
     var myScene = new MyScene();
     var myInterface = new MyInterface();
