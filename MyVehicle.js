@@ -6,7 +6,7 @@ class MyVehicle extends CGFobject {
     constructor(scene) {
         super(scene);
         //this.mesh = new MyPyramid(scene, 3, 1);
-        this.ellipsoid = new MySphere(scene, 50, 50);
+        this.balloon = new MySphere(scene, 50, 50);
 
         this.pos = vec3.fromValues(0.0,0.0,0.0); //x, y, z
         this.velocity = 0.0;
@@ -16,6 +16,7 @@ class MyVehicle extends CGFobject {
         this.scaleFactor = 1.0;
  
         this.rudder = new MyRudder(scene);
+        this.gondola = new MyGondola(scene);
     }
 
     initBuffers() {
@@ -58,11 +59,14 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.direction, 0, 1, 0);
         
         this.scene.pushMatrix();
+        
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor * 2);
-        this.ellipsoid.display();
+        this.balloon.display();
+
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        
         this.scene.translate(0, 0, -2);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
 
@@ -76,7 +80,14 @@ class MyVehicle extends CGFobject {
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
         }
 
+
         this.scene.popMatrix();
+
+        this.gondola.display();
+
+        for (var i = 0; i < 2; i++) {
+            // Propeller
+        }
 
         this.scene.popMatrix();
     }

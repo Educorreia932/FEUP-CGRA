@@ -15,6 +15,7 @@ serialInclude(['../lib/CGF.js',
                'MyTerrain.js',
                'MyTriangle.js',
                'MyRudder.js',
+               'MyGondola.js',
 
 main=function() {
     var app = new CGFapplication(document.body);
