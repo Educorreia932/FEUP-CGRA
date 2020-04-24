@@ -160,7 +160,7 @@ class MyScene extends CGFscene {
         this.cubeMap.display();
 
         this.pushMatrix();
-        this.translate(0, -4,0);
+        this.translate(0, 0, 0);
         this.terrain.display();
         this.popMatrix();
 

@@ -45,7 +45,9 @@ class MyVehicle extends CGFobject {
     }
 
     accelerate(val) {
-        this.velocity += val;
+        if((this.velocity += val) < 0)
+            this.velocity = 0;
+            
     }
 
     display() {
