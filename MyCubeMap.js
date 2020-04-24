@@ -12,7 +12,8 @@ class MyCubeMap extends CGFobject {
         this.material.setAmbient(1.0, 1.0, 1.0, 1.0);
         this.material.setDiffuse(0.5, 0.5, 0.5, 0.5);
         this.material.setSpecular(0.0, 0.0, 0.0, 1.0);
-        this.material.loadTexture("images/cubemap.png")
+        this.texture = new CGFtexture(this.scene, "images/cubemap.png");
+        this.material.setTexture(this.texture);
     }
     
 	initBuffers() {
@@ -125,12 +126,12 @@ class MyCubeMap extends CGFobject {
 			0.50, 0.66, 
 			0.25, 0.66, 
 			
-			// Y Plane = 0.5
-			0.50, 0.34,
-            0.25, 0.34,
+            // Y Plane = 0.5
             0.25, 0.00,
+            0.25, 0.34,
             0.50, 0.00,
-			
+            0.50, 0.34,
+
 			// Z Plane = 0.5 
             0.75, 0.66,
 			0.75, 0.34,  
@@ -157,7 +158,7 @@ class MyCubeMap extends CGFobject {
         this.scene.popMatrix();  
     }
 
-    updateBuffers(complexity){
+    updateBuffers(complexity) {
         
     }
 }

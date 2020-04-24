@@ -62,7 +62,7 @@ class MyScene extends CGFscene {
         this.numSlices = 6;
         this.cubeIds = { 'Montains': 0, 'Sky': 1};
         this.selectedCube = 0;
-        
+        this.displayNormals = false;
     }
 
     initLights() {
@@ -147,13 +147,13 @@ class MyScene extends CGFscene {
 
         this.setDefaultAppearance();
 
+        if (this.displayNormals)
+            this.vehicle.enableNormalViz();
+
+        else
+            this.vehicle.disableNormalViz();
 
         // ---- BEGIN Primitive drawing section
-
-        //if(this.selectedObject == 1 || this.selectedObject == 0) {
-        //    this.appearance.apply();
-        //}s
-        //this.objects[this.selectedObject].display();
 
         this.vehicle.display();
 
@@ -164,8 +164,6 @@ class MyScene extends CGFscene {
         this.terrain.display();
         this.popMatrix();
 
-
-        
         // ---- END Primitive drawing section
     }
 
