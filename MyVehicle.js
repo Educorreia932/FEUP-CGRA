@@ -47,7 +47,7 @@ class MyVehicle extends CGFobject {
                 this.rudderAngle = 0;
         }
 
-        this.propeller.update();
+        this.propeller.update(this.velocity);
     }
 
     reset() {
