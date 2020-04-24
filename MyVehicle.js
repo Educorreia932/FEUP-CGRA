@@ -46,6 +46,8 @@ class MyVehicle extends CGFobject {
             if((this.rudderAngle += 0.1)>0)
                 this.rudderAngle = 0;
         }
+
+        this.propeller.update();
     }
 
     reset() {
@@ -115,7 +117,7 @@ class MyVehicle extends CGFobject {
         for (var i = 0; i < 2; i++) {
             this.scene.pushMatrix();
             this.scene.translate(0.2 * (i == 0? 1 : -1), -1.05, -0.7);
-            this.propeller.display();
+            this.propeller.display(i);
             this.scene.popMatrix();
         }
 

@@ -4,13 +4,20 @@
  * @param scene - Reference to MyScene object
  */
 class MyPropeller extends CGFobject {
-	constructor(scene) {
+	constructor(scene, num) {
         super(scene);
                 
         this.sphere = new MySphere(scene, 50, 50); 
-	}
 
-    display() {
+        this.propellerAngle = 0;
+        
+    }
+    
+    update() {
+        this.propellerAngle += Math.PI/5;
+    }
+
+    display(num) {
         this.scene.pushMatrix();
 
         this.scene.scale(0.12, 0.12, 0.12);
@@ -24,7 +31,7 @@ class MyPropeller extends CGFobject {
 
         this.scene.pushMatrix();
 
-        // this.scene.rotate(Math.PI / 3, 0, 0, 1);
+        this.scene.rotate(this.propellerAngle + num, 0, 0, 1);
 
         this.scene.pushMatrix();
 
