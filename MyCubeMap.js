@@ -107,7 +107,41 @@ class MyCubeMap extends CGFobject {
         }
 
         this.texCoords = [
-            
+			// X Plane = 0.5
+			0.75, 0.66,
+			0.50, 0.66, 
+			0.75, 0.33,
+			0.50, 0.33,
+
+			// X Plane = -0.5
+			0.00, 0.66,
+			0.25, 0.66,
+			0.00, 0.33,
+			0.25, 0.33,
+			
+			// Y Plane = -0.5
+			0.25, 1.00,  
+			0.50, 1.00,  
+			0.50, 0.66, 
+			0.25, 0.66, 
+			
+			// Y Plane = 0.5
+			0.50, 0.33,
+            0.25, 0.33,
+            0.25, 0.00,
+            0.50, 0.00,
+			
+			// Z Plane = 0.5 
+            0.75, 0.66,
+			0.75, 0.33,  
+			1.00, 0.66,
+			1.00, 0.33,  
+
+			// Z Plane = -0.5
+			0.25, 0.66,
+			0.50, 0.66,
+			0.25, 0.33,
+			0.50, 0.33,
 		]
 
         this.initGLBuffers();
@@ -116,7 +150,7 @@ class MyCubeMap extends CGFobject {
     display() {
         this.scene.pushMatrix();
 
-        this.scene.scale(5, 5, 5);
+        this.scene.scale(50, 50, 50);
         this.material.apply();
         super.display();
 
