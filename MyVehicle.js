@@ -17,6 +17,7 @@ class MyVehicle extends CGFobject {
  
         this.rudder = new MyRudder(scene);
         this.gondola = new MyGondola(scene);
+        this.propeller = new MyPropeller(scene);
     }
 
     initBuffers() {
@@ -66,7 +67,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        
+
         this.scene.translate(0, 0, -2);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
 
@@ -86,7 +87,10 @@ class MyVehicle extends CGFobject {
         this.gondola.display();
 
         for (var i = 0; i < 2; i++) {
-            // Propeller
+            this.scene.pushMatrix();
+            this.scene.translate(0.2 * (i == 0? 1 : -1), -1.05, -0.7);
+            this.propeller.display();
+            this.scene.popMatrix();
         }
 
         this.scene.popMatrix();
