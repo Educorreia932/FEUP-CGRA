@@ -18,6 +18,8 @@ class MyVehicle extends CGFobject {
         this.rudder = new MyRudder(scene);
         this.gondola = new MyGondola(scene);
         this.propeller = new MyPropeller(scene);
+
+        this.rudderAngle = 0;
     }
 
     initBuffers() {
@@ -35,6 +37,15 @@ class MyVehicle extends CGFobject {
         
         if (this.scene.gui.isKeyPressed("KeyW")) 
             console.log(this.direction);
+
+        if(this.rudderAngle > 0) {
+            if((this.rudderAngle -= 0.1)<0)
+                this.rudderAngle = 0;
+        }
+        else if(this.rudderAngle < 0) {
+            if((this.rudderAngle += 0.1)>0)
+                this.rudderAngle = 0;
+        }
     }
 
     reset() {
@@ -45,6 +56,11 @@ class MyVehicle extends CGFobject {
 
     turn(val) {
         this.direction += val;
+
+        if((this.rudderAngle += val*0.5) > Math.PI/6)
+            this.rudderAngle = Math.PI/6;
+        else if(this.rudderAngle < -Math.PI/6)
+            this.rudderAngle = -Math.PI/6;
     }
 
     accelerate(val) {
@@ -72,12 +88,22 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
 
         for (var i = 0; i < 4; i++) {
-            if (i == 1 || i == 3) {
-                // Vertical
+            if (i == 1) {
+                this.scene.pushMatrix();
+                this.scene.rotate(this.rudderAngle, 0, 0, 1);
+                this.rudder.display();
+                this.scene.popMatrix();
             }
-
-            this.rudder.display();
-
+            else if(i == 3) {
+                this.scene.pushMatrix();
+                this.scene.rotate(-this.rudderAngle, 0, 0, 1);
+                this.rudder.display();
+                this.scene.popMatrix();
+            }
+            else
+            {
+                this.rudder.display();
+            }
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
         }
 
