@@ -6,8 +6,20 @@
 class MyRudder extends CGFobject {
 	constructor(scene, coords) {
         super(scene);
+
+        this.quadTexCoords = [
+			1, 1,
+			0, 1,
+			1, 0.5,
+			0, 0.5,
+
+			1, 1,
+			0, 1,
+			1, 0.5,
+			0, 0.5
+		];
                 
-        this.quad = new MyQuad(scene);   
+        this.quad = new MyQuad(scene, this.quadTexCoords);   
         this.triangle = new MyTriangle(scene); 
 	}
 

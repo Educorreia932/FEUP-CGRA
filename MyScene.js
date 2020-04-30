@@ -45,6 +45,13 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
 
+        this.supplies = [];
+        for(var i = 0; i < 5; ++i) {
+            this.supplies[i] = new MySupply(this);
+        }
+
+        this.nSupplies = 0;
+
         this.appearance = new CGFappearance(this);
 		this.appearance.setAmbient(0.1, 0.1, 0.1, 1);
         this.appearance.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -87,6 +94,9 @@ class MyScene extends CGFscene {
         //To be done...
         this.checkKeys();
         this.vehicle.update();
+        for(var i = 0; i < 5; ++i) {
+            this.supplies[i].update();
+        }
     }
 
     checkKeys() {
@@ -116,6 +126,14 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R ";
             this.vehicle.reset();
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyL")) {
+            text+=" L ";
+            if(this.nSupplies < 5) {
+                this.supplies[this.nSupplies].drop(this.vehicle.pos);
+                this.nSupplies++;
+            }
             keysPressed=true;
         }
         if (keysPressed)
@@ -160,6 +178,10 @@ class MyScene extends CGFscene {
         this.translate(0, 0, 0);
         this.terrain.display();
         this.popMatrix();
+
+        for(var i = 0; i < 5; ++i) {
+            this.supplies[i].display();
+        }
 
         // ---- END Primitive drawing section
     }

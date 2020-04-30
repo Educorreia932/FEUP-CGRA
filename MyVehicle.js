@@ -5,10 +5,10 @@
 class MyVehicle extends CGFobject {
     constructor(scene) {
         super(scene);
-        //this.mesh = new MyPyramid(scene, 3, 1);
+        
         this.balloon = new MySphere(scene, 50, 50);
 
-        this.pos = vec3.fromValues(0.0,0.0,0.0); //x, y, z
+        this.pos = vec3.fromValues(0.0, 10.0, 0.0); //x, y, z
         this.velocity = 0.0;
         this.direction = 0.0;
         this.speedFactor = 1.5;
@@ -43,8 +43,9 @@ class MyVehicle extends CGFobject {
     
         var x = this.pos[0] + this.velocity * this.speedFactor * Math.sin(this.direction);
         var z = this.pos[2] + this.velocity * this.speedFactor * Math.cos(this.direction);
+        var y = this.pos[1];
 
-        this.pos = vec3.fromValues(x, 0, z);
+        this.pos = vec3.fromValues(x, y, z);
         
         if (this.scene.gui.isKeyPressed("KeyW")) 
             console.log(this.direction);
@@ -62,7 +63,7 @@ class MyVehicle extends CGFobject {
     }
 
     reset() {
-        this.pos = vec3.fromValues(0.0, 0.0, 0.0);
+        this.pos = vec3.fromValues(0.0, 10.0, 0.0);
         this.velocity = 0.0;
         this.direction = 0.0;
     }
@@ -85,8 +86,7 @@ class MyVehicle extends CGFobject {
         
         this.scene.pushMatrix();
 
-        this.scene.translate(0, 10, 0);
-        this.scene.translate(this.pos[0], -this.pos[1], this.pos[2]);
+        this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
         this.scene.rotate(this.direction, 0, 1, 0);
         
 
