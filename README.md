@@ -1,2 +1,2 @@
-# CGRA
-MIEIC 2019/2020 - 2º ano / 2º semestre 
+# Computer Graphics
+## MIEIC - 2nd year / 1st semester
