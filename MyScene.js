@@ -103,25 +103,28 @@ class MyScene extends CGFscene {
         var text="Keys pressed: ";
         var keysPressed=false;
         // Check for key codes e.g. in https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
-            text+=" W ";
-            this.vehicle.accelerate(0.01);
-            keysPressed=true;
-        }
-        if (this.gui.isKeyPressed("KeyS")) {
-            text+=" S ";
-            this.vehicle.accelerate(-0.01);
-            keysPressed=true;
-        }
-        if (this.gui.isKeyPressed("KeyA")) {
-            text+=" A ";
-            this.vehicle.turn(Math.PI/12);
-            keysPressed=true;
-        }
-        if (this.gui.isKeyPressed("KeyD")) {
-            text+=" D ";
-            this.vehicle.turn(-Math.PI/12);
-            keysPressed=true;
+        if(!this.vehicle.autoPilot) {
+            if (this.gui.isKeyPressed("KeyW")) {
+                text+=" W ";
+                this.vehicle.accelerate(0.01);
+                keysPressed=true;
+            }
+            if (this.gui.isKeyPressed("KeyS")) {
+                text+=" S ";
+                this.vehicle.accelerate(-0.01);
+                keysPressed=true;
+            }
+            if (this.gui.isKeyPressed("KeyA")) {
+                text+=" A ";
+                this.vehicle.turn(Math.PI/12);
+                keysPressed=true;
+            }
+            if (this.gui.isKeyPressed("KeyD")) {
+                text+=" D ";
+                this.vehicle.turn(-Math.PI/12);
+                keysPressed=true;
+            }
+            
         }
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R ";
@@ -136,6 +139,19 @@ class MyScene extends CGFscene {
             }
             keysPressed=true;
         }
+        if (this.gui.isKeyPressed("KeyP")) {
+            text+=" P ";
+            this.vehicle.startAutoPilot();
+            
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyI")) {
+            text+=" I ";
+            this.vehicle.autoPilot = false;
+            
+            keysPressed=true;
+        }
+        
         if (keysPressed)
             console.log(text);
     }

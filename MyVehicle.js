@@ -21,6 +21,13 @@ class MyVehicle extends CGFobject {
 
         this.rudderAngle = 0;
 
+        this.autoPilot = false;
+        this.autoCenter = vec3.fromValues(0.0, 0.0, 0.0); //centro da volta no auto-pilot
+        this.startAng = 0.0;
+        this.angAuto = 0.0; //angulo da rotação paralelo ao eixo xx
+        this.startTime = 0;
+        this.timeCounter = 0.0;
+
         this.material = new CGFappearance(this.scene);
 		this.material.setAmbient(0.1, 0.1, 0.1, 1);
         this.material.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -40,15 +47,35 @@ class MyVehicle extends CGFobject {
     update() {
         if (this.vehicleFriction && this.velocity != 0) 
             this.velocity *= 0.95;
-    
-        var x = this.pos[0] + this.velocity * this.speedFactor * Math.sin(this.direction);
-        var z = this.pos[2] + this.velocity * this.speedFactor * Math.cos(this.direction);
+
+        if(this.autoPilot) {
+            this.timeCounter = ((new Date().getTime())-this.startTime)/1000.0;
+            if(this.timeCounter > 5.0) {
+                this.timeCounter = 0.0;
+                this.startTime = new Date().getTime();
+                console.log(this.timeCounter);
+            }
+            this.angAuto = (this.startAng + (this.timeCounter * Math.PI*2)/5.0) % (Math.PI*2);
+            //console.log(this.angAuto);
+            this.direction = (this.angAuto + Math.PI) % (Math.PI*2);
+            var x = this.autoCenter[0] + Math.cos(this.angAuto) * 5.0;
+            var z = this.autoCenter[2] - Math.sin(this.angAuto) * 5.0;
+            //console.log("x: " + x);
+            //console.log("z: "+ z);
+            console.log((this.angAuto*180.0)/Math.PI);
+            console.log(Math.cos(this.angAuto));
+            console.log(Math.sin(this.angAuto));
+            console.log(" ");
+            //console.log(this.autoCenter);
+        }
+        else {
+            var x = this.pos[0] + this.velocity * this.speedFactor * Math.sin(this.direction);
+            var z = this.pos[2] + this.velocity * this.speedFactor * Math.cos(this.direction);
+        }
+
         var y = this.pos[1];
 
         this.pos = vec3.fromValues(x, y, z);
-        
-        if (this.scene.gui.isKeyPressed("KeyW")) 
-            console.log(this.direction);
 
         if(this.rudderAngle > 0) {
             if((this.rudderAngle -= 0.1)<0)
@@ -70,6 +97,7 @@ class MyVehicle extends CGFobject {
 
     turn(val) {
         this.direction += val;
+        this.direction = this.direction % (Math.PI*2);
 
         if((this.rudderAngle += val*0.5) > Math.PI/6)
             this.rudderAngle = Math.PI/6;
@@ -80,6 +108,25 @@ class MyVehicle extends CGFobject {
     accelerate(val) {
         if ((this.velocity += val) < 0)
             this.velocity = 0;
+    }
+
+    startAutoPilot() {
+        if(!this.autoPilot) {
+            this.autoPilot = true;
+
+            this.startAng = this.direction + Math.PI;
+            this.angAuto = this.startAng;
+            var xCenter = this.pos[0] - Math.cos(Math.abs(this.angAuto)) * 5.0;
+            var zCenter = this.pos[2] - Math.sin(Math.abs(this.angAuto)) * 5.0;
+            this.autoCenter = vec3.fromValues(xCenter, 10, zCenter);
+            this.startTime = new Date().getTime();
+            this.timeCounter = 5.0;
+        }
+        // else {
+        //     this.autoPilot = false;
+        // }
+        
+
     }
 
     display() {
