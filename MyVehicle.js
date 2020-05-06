@@ -56,17 +56,11 @@ class MyVehicle extends CGFobject {
                 console.log(this.timeCounter);
             }
             this.angAuto = (this.startAng + (this.timeCounter * Math.PI*2)/5.0) % (Math.PI*2);
-            //console.log(this.angAuto);
             this.direction = (this.angAuto + Math.PI) % (Math.PI*2);
             var x = this.autoCenter[0] + Math.cos(this.angAuto) * 5.0;
             var z = this.autoCenter[2] - Math.sin(this.angAuto) * 5.0;
-            //console.log("x: " + x);
-            //console.log("z: "+ z);
-            console.log((this.angAuto*180.0)/Math.PI);
-            console.log(Math.cos(this.angAuto));
-            console.log(Math.sin(this.angAuto));
-            console.log(" ");
-            //console.log(this.autoCenter);
+
+            this.rudderAngle = Math.PI/7;
         }
         else {
             var x = this.pos[0] + this.velocity * this.speedFactor * Math.sin(this.direction);
@@ -114,19 +108,17 @@ class MyVehicle extends CGFobject {
         if(!this.autoPilot) {
             this.autoPilot = true;
 
-            this.startAng = this.direction + Math.PI;
+            this.startAng = (this.direction + Math.PI) % (Math.PI*2);
             this.angAuto = this.startAng;
-            var xCenter = this.pos[0] - Math.cos(Math.abs(this.angAuto)) * 5.0;
-            var zCenter = this.pos[2] - Math.sin(Math.abs(this.angAuto)) * 5.0;
+            var xCenter = this.pos[0] - Math.cos(this.angAuto) * 5.0;
+            var zCenter = this.pos[2] + Math.sin(this.angAuto) * 5.0;
             this.autoCenter = vec3.fromValues(xCenter, 10, zCenter);
             this.startTime = new Date().getTime();
             this.timeCounter = 5.0;
         }
-        // else {
-        //     this.autoPilot = false;
-        // }
-        
-
+        else {
+            this.autoPilot = false;
+        }
     }
 
     display() {
