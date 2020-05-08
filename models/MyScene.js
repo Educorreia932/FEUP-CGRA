@@ -99,7 +99,7 @@ class MyScene extends CGFscene {
         this.checkKeys();
         this.vehicle.update(t - this.oldTime);
         for(var i = 0; i < 5; ++i) {
-            this.supplies[i].update();
+            this.supplies[i].update(t - this.oldTime);
         }
         this.oldTime = t;
     }
@@ -134,6 +134,10 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R ";
             this.vehicle.reset();
+            for(var i = 0; i < 5; ++i) {
+                this.supplies[i].reset();
+            }
+            this.nSupplies = 0;
             keysPressed=true;
         }
         if (this.gui.isKeyPressed("KeyL")) {
@@ -141,6 +145,7 @@ class MyScene extends CGFscene {
             if(this.nSupplies < 5) {
                 this.supplies[this.nSupplies].drop(this.vehicle.pos);
                 this.nSupplies++;
+                this.billboard.updateSupplies();
             }
             keysPressed=true;
         }

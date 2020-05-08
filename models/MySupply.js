@@ -15,7 +15,9 @@ class MySupply extends CGFobject {
 
 		this.pos = vec3.fromValues(0.0,0.0,0.0);
 
-		this.fallVelocity = 0.1;
+		this.speed = 0.0;
+
+		this.timeCount = 0.0;
 
 		
 		this.materialSide = new CGFappearance(this.scene);
@@ -42,23 +44,42 @@ class MySupply extends CGFobject {
 
 	drop(dropPosition) {
 		this.pos = dropPosition;
-		console.log(this.pos);
+		this.speed = (this.pos[1] - 0.01) / 3.0;
 		this.state = SupplyStates.FALLING;
+		console.log(this.speed);
 	}
 
-	update() {
+	update(t) {
 		var x = this.pos[0];
 		var y = this.pos[1];
 		var z = this.pos[2];
 
+		var tSeconds = (t/1000.0);
+		var left = 0;
+		
 		if(this.state == SupplyStates.FALLING) {
-			if((y -= this.fallVelocity) < 0.5) {
-				y = 0.01;
-				this.state = SupplyStates.LANDED;	
+			this.timeCount += tSeconds;
+			if(this.timeCount >= 3.0) {
+				left = this.timeCount - 3.0;
+				this.timeCount = 3.0;
+				this.land();
 			}
+
+			y -= (tSeconds-left) * this.speed;
 			this.pos = vec3.fromValues(x, y, z);
 		}
 		
+	}
+
+	land() {
+		if(this.pos[1] <= 0.1)
+			this.state = SupplyStates.LANDED;
+	}
+
+	reset() {
+		this.pos = vec3.fromValues(0.0, 0.0, 0.0);
+		this.speed = 0.0;
+		this.state = SupplyStates.INACTIVE;
 	}
 
 	display() {
@@ -179,5 +200,7 @@ class MySupply extends CGFobject {
 
 		this.scene.popMatrix();
 	}
+	
+	
 }
 
