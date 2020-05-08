@@ -50,6 +50,12 @@ class MyPlane extends CGFobject{
 		this.initGLBuffers();
 	}
 
+
+	updateTexCoords() {
+		this.texCoords = this.texCoords.reverse();
+		this.updateTexCoordsGLBuffers();
+	}
+
 	setFillMode() { 
 		this.primitiveType=this.scene.gl.TRIANGLE_STRIP;
 	}
