@@ -47,6 +47,7 @@ class MyScene extends CGFscene {
         this.billboard = new MyBillboard(this);
 
         this.supplies = [];
+        
         for(var i = 0; i < 5; ++i) {
             this.supplies[i] = new MySupply(this);
         }
