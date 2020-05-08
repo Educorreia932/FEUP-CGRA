@@ -4,7 +4,7 @@
  * @param scene - Reference to MyScene object
  */
 class MyPropeller extends CGFobject {
-	constructor(scene, num) {
+	constructor(scene) {
         super(scene);
                 
         this.sphere = new MySphere(scene, 50, 50); 
@@ -19,7 +19,6 @@ class MyPropeller extends CGFobject {
         this.propellerTexture = new CGFtexture(this.scene, "images/propellerTexture.jpg");
         this.propellerTexture2 = new CGFtexture(this.scene, "images/propellerTexture2.jpg");
         this.engineTexture = new CGFtexture(this.scene, "images/engineTexture.jpg");
-        
     }
     
     update(vehicleVelocity) {
