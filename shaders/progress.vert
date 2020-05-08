@@ -12,6 +12,8 @@ uniform float normScale;
 
 //uniform float timeFactor;
 
+varying vec4 textx;
+
 uniform sampler2D uSampler;
 
 void main() {
@@ -20,5 +22,5 @@ void main() {
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
 
-	
+    textx = vec4(aVertexPosition, 1.0);
 }

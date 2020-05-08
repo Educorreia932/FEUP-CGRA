@@ -36,13 +36,12 @@ class MyBillboard extends CGFobject {
 
         this.progressShader = new CGFshader(this.scene.gl, "shaders/progress.vert", "shaders/progress.frag");
         this.progressShader.setUniformsValues({uSampler : 2});
-        this.progressShader.setUniformsValues({nSupplies: 1.0});
+        this.progressShader.setUniformsValues({nSupplies: this.scene.nSupplies});
         
     }
 
     updateSupplies() {
-        this.supplies++;
-        this.progressShader.setUniformsValues({nSupplies: this.supplies});
+        this.progressShader.setUniformsValues({nSupplies: this.scene.nSupplies});
     }
 
     display() {
@@ -68,17 +67,16 @@ class MyBillboard extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(2, 1, 1);
         this.scene.translate(0, 1, 0);
-        //this.base.enableNormalViz(); //display normals
         this.base.display();
         this.scene.popMatrix();
 
+ 
         
-        this.scene.setActiveShader(this.progressShader);
-        this.beamTexture.bind(2);
         this.material2.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, 0.9, 0.005);
         this.scene.scale(1.5, 0.2, 1); 
+        this.scene.setActiveShader(this.progressShader);
         this.bar.display();
         this.scene.popMatrix();
         this.scene.setActiveShader(this.scene.defaultShader);

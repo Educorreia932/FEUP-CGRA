@@ -46,7 +46,6 @@ class MySupply extends CGFobject {
 		this.pos = dropPosition;
 		this.speed = (this.pos[1] - 0.01) / 3.0;
 		this.state = SupplyStates.FALLING;
-		console.log(this.speed);
 	}
 
 	update(t) {
@@ -72,8 +71,9 @@ class MySupply extends CGFobject {
 	}
 
 	land() {
-		if(this.pos[1] <= 0.1)
+		if(this.pos[1] <= 0.1) {
 			this.state = SupplyStates.LANDED;
+		}
 	}
 
 	reset() {

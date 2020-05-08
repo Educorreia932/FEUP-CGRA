@@ -203,6 +203,8 @@ class MyScene extends CGFscene {
             this.supplies[i].display();
         }
 
+        this.pushMatrix();
+        this.translate(5, 10, 5);
         this.billboard.display();
 
         // ---- END Primitive drawing section
