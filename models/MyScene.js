@@ -101,6 +101,7 @@ class MyScene extends CGFscene {
         for(var i = 0; i < 5; ++i) {
             this.supplies[i].update(t - this.oldTime);
         }
+
         this.oldTime = t;
     }
 
