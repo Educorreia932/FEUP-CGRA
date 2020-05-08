@@ -18,6 +18,7 @@ serialInclude(['../lib/CGF.js',
                'MyGondola.js',
                'MyPropeller.js',
                'MySupply.js',
+               'MyBillboard.js',
 
 main=function() {
     var app = new CGFapplication(document.body);

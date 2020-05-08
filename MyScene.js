@@ -44,6 +44,7 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
+        this.billboard = new MyBillboard(this);
 
         this.supplies = [];
         for(var i = 0; i < 5; ++i) {
@@ -69,6 +70,8 @@ class MyScene extends CGFscene {
         this.cubeIds = { 'Montains': 0, 'Sky': 1};
         this.selectedCube = 0;
         this.displayNormals = false;
+
+        this.oldTime = new Date().getTime();
     }
 
     initLights() {
@@ -93,10 +96,11 @@ class MyScene extends CGFscene {
     update(t) {
         //To be done...
         this.checkKeys();
-        this.vehicle.update();
+        this.vehicle.update(t - this.oldTime);
         for(var i = 0; i < 5; ++i) {
             this.supplies[i].update();
         }
+        this.oldTime = t;
     }
 
     checkKeys() {
@@ -192,6 +196,8 @@ class MyScene extends CGFscene {
         for(var i = 0; i < 5; ++i) {
             this.supplies[i].display();
         }
+
+        this.billboard.display();
 
         // ---- END Primitive drawing section
     }

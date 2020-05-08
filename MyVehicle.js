@@ -25,7 +25,6 @@ class MyVehicle extends CGFobject {
         this.autoCenter = vec3.fromValues(0.0, 0.0, 0.0); //centro da volta no auto-pilot
         this.startAng = 0.0;
         this.angAuto = 0.0; //angulo da rotação paralelo ao eixo xx
-        this.startTime = 0;
         this.timeCounter = 0.0;
 
         this.material = new CGFappearance(this.scene);
@@ -44,16 +43,14 @@ class MyVehicle extends CGFobject {
        
     }
 
-    update() {
+    update(t) {
         if (this.vehicleFriction && this.velocity != 0) 
             this.velocity *= 0.95;
 
         if(this.autoPilot) {
-            this.timeCounter = ((new Date().getTime())-this.startTime)/1000.0;
+            this.timeCounter += (t / 1000.0) ;
             if(this.timeCounter > 5.0) {
                 this.timeCounter = 0.0;
-                this.startTime = new Date().getTime();
-                console.log(this.timeCounter);
             }
             this.angAuto = (this.startAng + (this.timeCounter * Math.PI*2)/5.0) % (Math.PI*2);
             this.direction = (this.angAuto + Math.PI) % (Math.PI*2);
@@ -113,8 +110,7 @@ class MyVehicle extends CGFobject {
             var xCenter = this.pos[0] - Math.cos(this.angAuto) * 5.0;
             var zCenter = this.pos[2] + Math.sin(this.angAuto) * 5.0;
             this.autoCenter = vec3.fromValues(xCenter, 10, zCenter);
-            this.startTime = new Date().getTime();
-            this.timeCounter = 5.0;
+            this.timeCounter = 0.0;
         }
         else {
             this.autoPilot = false;

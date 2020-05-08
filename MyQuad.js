@@ -19,10 +19,10 @@ class MyQuad extends CGFobject {
 			-0.5, 0.5, 0,	//2
 			0.5, 0.5, 0,  	//3
 			
-			-0.5, -0.5, 0,	//0
-			0.5, -0.5, 0,	//1
-			-0.5, 0.5, 0,	//2
-			0.5, 0.5, 0		//3
+			-0.5, -0.5, 0,	//4
+			0.5, -0.5, 0,	//5
+			-0.5, 0.5, 0,	//6
+			0.5, 0.5, 0		//7
 		];
 
 		// Counter-clockwise reference of vertices
@@ -77,10 +77,10 @@ class MyQuad extends CGFobject {
 	 * Updates the list of texture coordinates of the quad
 	 * @param {Array} coords - Array of texture coordinates
 	 */
-	// updateTexCoords(coords) {
-	// 	this.texCoords = [...coords];
-	// 	this.updateTexCoordsGLBuffers();
-	// }
+	updateTexCoords(coords) {
+	 	this.texCoords = [...coords];
+	 	this.updateTexCoordsGLBuffers();
+	}
 
 }
 
