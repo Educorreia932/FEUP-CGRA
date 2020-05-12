@@ -15,11 +15,12 @@ uniform float velocity;
 uniform sampler2D uSampler2;
 
 void main() {
-    vec3 offset=vec3(0.0, 0.0, 1.0);
-    
+    vec3 offset=vec3(0.0, 0.0, 0.0);
+    float PI = 3.14159265359;
     vTextureCoord = aTextureCoord;
 
-    offset *= cos((aVertexPosition.x + timeFactor + velocity) * 3.0) * 0.5 * (aVertexPosition.x - 0.5);
-
+    //vec3 offset = vec3(0.0, 0.0, cos(aVertexPosition.x + timeFactor) * 3.0 * (aVertexPosition-0.5));//cos((aVertexPosition.x + timeFactor + 0.5*velocity) * 3.0) * 0.5 * (aVertexPosition.x - 0.5));
+    if(aTextureCoord.x > 0.001)
+        offset = vec3(0.0, 0.0, sin(aTextureCoord.x*6.0*PI + timeFactor) * 0.01);
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
 }

@@ -73,6 +73,8 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
 
         this.oldTime = new Date().getTime();
+
+        this.testPlane = new MyPlane(this, 5, 0, 1 , 0 ,1);
     }
 
     initLights() {
@@ -97,7 +99,7 @@ class MyScene extends CGFscene {
     update(t) {
         //To be done...
         this.checkKeys();
-        this.vehicle.update(t - this.oldTime);
+        this.vehicle.update(t - this.oldTime, t);
         for(var i = 0; i < 5; ++i) {
             this.supplies[i].update(t - this.oldTime);
         }
@@ -205,6 +207,8 @@ class MyScene extends CGFscene {
         }
 
         this.billboard.display();
+
+        this.testPlane.display();
 
         // ---- END Primitive drawing section
     }

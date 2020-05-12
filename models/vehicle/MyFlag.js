@@ -5,7 +5,7 @@
 class MyFlag extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.flag = new MyPlane(scene, 30, 0, 1, 0, 1);
+        this.flag = new MyFlagPlane(scene, 30, 0, 1, 0, 1);
 
         this.flagTexture = new CGFtexture(this.scene, "images/flag.png");
         this.material = new CGFappearance(this.scene);	
@@ -24,22 +24,28 @@ class MyFlag extends CGFobject {
         this.material.apply();
 
         this.scene.pushMatrix();
-        
-        this.scene.rotate(Math.PI / 2, 0, 1, 0);
-        this.scene.scale(20, 20, 20);
+
+        //this.scene.translate(0, 0, -4);
+        //this.scene.rotate(Math.PI/2, 0, 1, 0);
+        //this.scene.scale(1.5, 1, 1);
+        this.scene.scale(1, 1, 1);
         
         this.flag.display();
-
-        this.scene.pushMatrix();
-
-        this.scene.rotate(Math.PI / 2, 0, 0, 1);
-        this.scene.scale(1, -1, 1);
-        this.flag.updateTexCoords();
-        this.flag.display();
-
+        
         this.scene.popMatrix();
-        this.flag.updateTexCoords();
 
-        this.scene.popMatrix();
+
+        // this.scene.pushMatrix();
+
+        // this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        // this.scene.scale(-20, 20, 20);
+        // this.flag.updateTexCoords();
+        // this.flag.display();
+
+        // this.scene.popMatrix();
+        
+        // this.flag.updateTexCoords();
+        
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

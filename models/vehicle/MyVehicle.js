@@ -39,7 +39,7 @@ class MyVehicle extends CGFobject {
         this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
     }
 
-    update(t) {
+    update(t, tt) {
         if (this.vehicleFriction && this.velocity != 0) 
             this.velocity *= 0.95;
 
@@ -77,7 +77,9 @@ class MyVehicle extends CGFobject {
         }
 
         this.propeller.update(this.velocity);
-        this.flag.flagShader.setUniformsValues({ timeFactor: t, velocity: this.velocity});
+
+    
+        this.flag.flagShader.setUniformsValues({ timeFactor: (tt/100)%1000, velocity: this.velocity});
     }
 
     reset() {
@@ -130,7 +132,7 @@ class MyVehicle extends CGFobject {
         this.material.setTexture(this.balloonTexture);
         this.material.apply();
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor * 2);
-        this.balloon.display();
+        //this.balloon.display();
 
         this.scene.popMatrix();
 
@@ -182,8 +184,9 @@ class MyVehicle extends CGFobject {
 
         this.scene.popMatrix();
 
+        this.scene.pushMatrix();
         this.flag.display();
-        this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.popMatrix();
 
         this.scene.popMatrix();
     }
