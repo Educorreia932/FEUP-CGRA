@@ -46,7 +46,7 @@ class MyVehicle extends CGFobject {
             this.velocity *= 0.95;
 
         if (this.autoPilot) {
-            this.timeCounter += (t / 1000.0) ;
+            this.timeCounter += ((t / 1000.0) - (this.oldTime/1000.0));
             
             if (this.timeCounter > 5.0) 
                 this.timeCounter = 0.0;
@@ -57,7 +57,6 @@ class MyVehicle extends CGFobject {
             var z = this.autoCenter[2] - Math.sin(this.angAuto) * 5.0;
 
             this.rudderAngle = Math.PI/7;
-
         }
 
         else {
@@ -80,8 +79,10 @@ class MyVehicle extends CGFobject {
 
         this.propeller.update(this.velocity);
 
-    
-        this.flag.flagShader.setUniformsValues({ timeFactor: ((t-this.oldTime)/100)%1000, velocity: this.velocity});
+        console.log(this.velocity);
+        this.flag.flagShader.setUniformsValues({ timeFactor: ((t)/100)%1000, velocity: this.velocity});
+
+        this.oldTime = t;
     }
 
     reset() {
@@ -108,6 +109,7 @@ class MyVehicle extends CGFobject {
     startAutoPilot() {
         if(!this.autoPilot) {
             this.autoPilot = true;
+            this.oldTime = new Date().getTime();
 
             this.startAng = (this.direction + Math.PI) % (Math.PI*2);
             this.angAuto = this.startAng;

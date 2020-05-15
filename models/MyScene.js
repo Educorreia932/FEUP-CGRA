@@ -210,9 +210,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(5, 10, 5);
         this.billboard.display();
-
-        this.testPlane.display();
-
+        
         // ---- END Primitive drawing section
     }
 
