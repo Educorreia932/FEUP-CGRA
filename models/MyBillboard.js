@@ -22,7 +22,7 @@ class MyBillboard extends CGFobject {
         this.material = new CGFappearance(this.scene);
 		this.material.setAmbient(0.1, 0.1, 0.1, 1);
         this.material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.material.setSpecular(0.0, 0.0, 0.0, 1);
         this.material.setShininess(10.0);
 
         this.material2 = new CGFappearance(this.scene);
@@ -50,6 +50,7 @@ class MyBillboard extends CGFobject {
     }
 
     display() {
+        //Beams
         this.material.setTexture(this.beamTexture); 
         this.material.apply();
         this.scene.pushMatrix();
@@ -64,6 +65,7 @@ class MyBillboard extends CGFobject {
         this.beam.display();
         this.scene.popMatrix();
        
+        //Billboard
         this.material.setTexture(this.baseTexture); 
         this.material.apply();
         this.scene.pushMatrix();
@@ -72,8 +74,7 @@ class MyBillboard extends CGFobject {
         this.base.display();
         this.scene.popMatrix();
 
- 
-        
+        //Progress bar
         this.material2.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, 0.9, 0.005);

@@ -19,9 +19,6 @@ void main() {
     float PI = 3.14159265359;
     vTextureCoord = aTextureCoord;
 
-    //float wind = velocity
-
-    //vec3 offset = vec3(0.0, 0.0, cos(aVertexPosition.x + timeFactor) * 3.0 * (aVertexPosition-0.5));//cos((aVertexPosition.x + timeFactor + 0.5*velocity) * 3.0) * 0.5 * (aVertexPosition.x - 0.5));
     if(aTextureCoord.x > 0.001)
         //offset = vec3(0.0, 0.0, sin(aTextureCoord.x*6.0*PI + timeFactor*0.3 + velocity*0.5) * 0.05);
         offset = vec3(0.0, 0.0, sin(aTextureCoord.x*6.0*PI + phase*0.1) * 0.05);

@@ -28,6 +28,8 @@ class MyScene extends CGFscene {
         
         this.enableTextures(true);
 
+        this.setGlobalAmbientLight(0.6, 0.6, 0.6, 1.0);
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
@@ -76,10 +78,17 @@ class MyScene extends CGFscene {
     }
 
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+        this.lights[0].setPosition(15, 20, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setAmbient(0.5, 0.5, 0.5, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+
+        this.lights[1].setPosition(-15, 20, 5, 1);
+        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[1].setAmbient(0.5, 0.5, 0.5, 1.0);
+        this.lights[1].enable();
+        this.lights[1].update();
     }
     
     initCameras() {
@@ -210,7 +219,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(5, 10, 5);
         this.billboard.display();
-        
+
         // ---- END Primitive drawing section
     }
 

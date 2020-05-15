@@ -81,8 +81,7 @@ class MyVehicle extends CGFobject {
         }
 
         this.propeller.update(this.velocity);
-        // this.windVelocity = this.velocity * (t - this.oldTime);
-        // console.log(this.windVelocity);
+
         this.phase += (t-this.oldTime)/100 % 1000;
         this.phase += this.velocity * (t-this.oldTime);
 
@@ -142,7 +141,7 @@ class MyVehicle extends CGFobject {
         this.material.setTexture(this.balloonTexture);
         this.material.apply();
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor * 2);
-        //this.balloon.display();
+        this.balloon.display();
 
         this.scene.popMatrix();
 
@@ -195,6 +194,10 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.scene.translate(0, 0, -1.8);
+        this.scene.rotate(Math.PI/2 - this.rudderAngle*1.2, 0, 1, 0);
+        this.scene.translate(2, 0, 0);
+        this.scene.scale(1.0, 0.75, 1.0);
         this.flag.display();
         this.scene.popMatrix();
 
