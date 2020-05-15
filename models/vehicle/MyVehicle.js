@@ -18,6 +18,7 @@ class MyVehicle extends CGFobject {
         this.rudder = new MyRudder(scene);
         this.gondola = new MyGondola(scene);
         this.propeller = new MyPropeller(scene);
+        this.flag = new MyFlag(scene);
 
         this.rudderAngle = 0;
 
@@ -36,29 +37,27 @@ class MyVehicle extends CGFobject {
         this.balloonTexture = new CGFtexture(this.scene, "images/balloonTexture.jpg");
         this.gondolaTexture = new CGFtexture(this.scene, "images/gondolaTexture.jpg");
         this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
-		
     }
 
-    initBuffers() {
-       
-    }
-
-    update(t) {
+    update(t, tt) {
         if (this.vehicleFriction && this.velocity != 0) 
             this.velocity *= 0.95;
 
-        if(this.autoPilot) {
+        if (this.autoPilot) {
             this.timeCounter += (t / 1000.0) ;
-            if(this.timeCounter > 5.0) {
+            
+            if (this.timeCounter > 5.0) 
                 this.timeCounter = 0.0;
-            }
+
             this.angAuto = (this.startAng + (this.timeCounter * Math.PI*2)/5.0) % (Math.PI*2);
             this.direction = (this.angAuto + Math.PI) % (Math.PI*2);
             var x = this.autoCenter[0] + Math.cos(this.angAuto) * 5.0;
             var z = this.autoCenter[2] - Math.sin(this.angAuto) * 5.0;
 
             this.rudderAngle = Math.PI/7;
+
         }
+
         else {
             var x = this.pos[0] + this.velocity * this.speedFactor * Math.sin(this.direction);
             var z = this.pos[2] + this.velocity * this.speedFactor * Math.cos(this.direction);
@@ -78,6 +77,9 @@ class MyVehicle extends CGFobject {
         }
 
         this.propeller.update(this.velocity);
+
+    
+        this.flag.flagShader.setUniformsValues({ timeFactor: (tt/100)%1000, velocity: this.velocity});
     }
 
     reset() {
@@ -118,12 +120,11 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
-        
         this.scene.pushMatrix();
 
         this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
         this.scene.rotate(this.direction, 0, 1, 0);
-        
+
 
         //Balloon
         this.scene.pushMatrix();
@@ -131,7 +132,7 @@ class MyVehicle extends CGFobject {
         this.material.setTexture(this.balloonTexture);
         this.material.apply();
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor * 2);
-        this.balloon.display();
+        //this.balloon.display();
 
         this.scene.popMatrix();
 
@@ -150,16 +151,17 @@ class MyVehicle extends CGFobject {
                 this.rudder.display();
                 this.scene.popMatrix();
             }
+        
             else if(i == 3) {
                 this.scene.pushMatrix();
                 this.scene.rotate(-this.rudderAngle, 0, 0, 1);
                 this.rudder.display();
                 this.scene.popMatrix();
             }
+        
             else
-            {
                 this.rudder.display();
-            }
+
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
         }
 
@@ -179,6 +181,11 @@ class MyVehicle extends CGFobject {
             this.propeller.display(i);
             this.scene.popMatrix();
         }
+
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.flag.display();
         this.scene.popMatrix();
 
         this.scene.popMatrix();

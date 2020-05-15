@@ -45,8 +45,6 @@ class MyBillboard extends CGFobject {
     }
 
     display() {
-        
-
         this.material.setTexture(this.beamTexture); 
         this.material.apply();
         this.scene.pushMatrix();
@@ -60,7 +58,6 @@ class MyBillboard extends CGFobject {
         this.scene.scale(0.1, 1, 1); 
         this.beam.display();
         this.scene.popMatrix();
-
        
         this.material.setTexture(this.baseTexture); 
         this.material.apply();

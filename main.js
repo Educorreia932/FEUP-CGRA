@@ -15,10 +15,12 @@ serialInclude(['../lib/CGF.js',
     'models/vehicle/MyRudder.js',
     'models/vehicle/MyGondola.js',
     'models/vehicle/MyPropeller.js',
+    'models/vehicle/MyFlag.js',
     'models/MyPlane.js',
     'models/MyTerrain.js',
     'models/MySupply.js',
     'models/MyBillboard.js',
+    'models/MyFlagPlane.js',
 
     main = function () {
         var app = new CGFapplication(document.body);
