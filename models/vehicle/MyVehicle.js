@@ -38,6 +38,9 @@ class MyVehicle extends CGFobject {
         this.gondolaTexture = new CGFtexture(this.scene, "images/gondolaTexture.jpg");
         this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
 
+        this.windVelocity = 1.5;
+        this.phase = 0.0;
+
         this.oldTime = new Date().getTime();
     }
 
@@ -78,9 +81,12 @@ class MyVehicle extends CGFobject {
         }
 
         this.propeller.update(this.velocity);
+        // this.windVelocity = this.velocity * (t - this.oldTime);
+        // console.log(this.windVelocity);
+        this.phase += (t-this.oldTime)/100 % 1000;
+        this.phase += this.velocity * (t-this.oldTime);
 
-        console.log(this.velocity);
-        this.flag.flagShader.setUniformsValues({ timeFactor: ((t)/100)%1000, velocity: this.velocity});
+        this.flag.flagShader.setUniformsValues({ phase: this.phase});
 
         this.oldTime = t;
     }
