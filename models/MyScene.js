@@ -72,8 +72,6 @@ class MyScene extends CGFscene {
         this.selectedCube = 0;
         this.displayNormals = false;
 
-        this.oldTime = new Date().getTime();
-
         this.testPlane = new MyPlane(this, 5, 0, 1 , 0 ,1);
     }
 
@@ -99,12 +97,10 @@ class MyScene extends CGFscene {
     update(t) {
         //To be done...
         this.checkKeys();
-        this.vehicle.update(t - this.oldTime, t);
+        this.vehicle.update(t);
         for(var i = 0; i < 5; ++i) {
-            this.supplies[i].update(t - this.oldTime);
+            this.supplies[i].update(t);
         }
-
-        this.oldTime = t;
     }
 
     checkKeys() {
@@ -135,12 +131,8 @@ class MyScene extends CGFscene {
             
         }
         if (this.gui.isKeyPressed("KeyR")) {
+            this.reset();
             text+=" R ";
-            this.vehicle.reset();
-            for(var i = 0; i < 5; ++i) {
-                this.supplies[i].reset();
-            }
-            this.nSupplies = 0;
             keysPressed=true;
         }
         if (this.gui.isKeyPressed("KeyL")) {
@@ -161,6 +153,15 @@ class MyScene extends CGFscene {
         
         if (keysPressed)
             console.log(text);
+    }
+
+    reset() {
+        this.vehicle.reset();
+        for(var i = 0; i < 5; ++i) {
+            this.supplies[i].reset();
+        }
+        this.nSupplies = 0;
+        this.billboard.reset();
     }
         
     updateCubeTexture() {

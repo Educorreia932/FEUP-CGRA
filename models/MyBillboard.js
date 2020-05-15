@@ -44,6 +44,11 @@ class MyBillboard extends CGFobject {
         this.progressShader.setUniformsValues({nSupplies: this.scene.nSupplies});
     }
 
+    reset() {
+        this.supplies = 0;
+        this.updateSupplies();
+    }
+
     display() {
         this.material.setTexture(this.beamTexture); 
         this.material.apply();

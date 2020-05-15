@@ -37,9 +37,11 @@ class MyVehicle extends CGFobject {
         this.balloonTexture = new CGFtexture(this.scene, "images/balloonTexture.jpg");
         this.gondolaTexture = new CGFtexture(this.scene, "images/gondolaTexture.jpg");
         this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
+
+        this.oldTime = new Date().getTime();
     }
 
-    update(t, tt) {
+    update(t) {
         if (this.vehicleFriction && this.velocity != 0) 
             this.velocity *= 0.95;
 
@@ -79,7 +81,7 @@ class MyVehicle extends CGFobject {
         this.propeller.update(this.velocity);
 
     
-        this.flag.flagShader.setUniformsValues({ timeFactor: (tt/100)%1000, velocity: this.velocity});
+        this.flag.flagShader.setUniformsValues({ timeFactor: ((t-this.oldTime)/100)%1000, velocity: this.velocity});
     }
 
     reset() {

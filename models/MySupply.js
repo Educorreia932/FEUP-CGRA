@@ -19,6 +19,8 @@ class MySupply extends CGFobject {
 
 		this.timeCount = 0.0;
 
+		this.oldTime = 0.0;
+
 		
 		this.materialSide = new CGFappearance(this.scene);
 		this.materialSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -46,6 +48,7 @@ class MySupply extends CGFobject {
 		this.pos = dropPosition;
 		this.speed = (this.pos[1] - 0.01) / 3.0;
 		this.state = SupplyStates.FALLING;
+		this.oldTime = new Date().getTime();
 	}
 
 	update(t) {
@@ -53,7 +56,7 @@ class MySupply extends CGFobject {
 		var y = this.pos[1];
 		var z = this.pos[2];
 
-		var tSeconds = (t/1000.0);
+		var tSeconds = (t/1000.0) - this.oldTime/1000.0;
 		var left = 0;
 		
 		if(this.state == SupplyStates.FALLING) {
@@ -67,7 +70,7 @@ class MySupply extends CGFobject {
 			y -= (tSeconds-left) * this.speed;
 			this.pos = vec3.fromValues(x, y, z);
 		}
-		
+		this.oldTime = t;	
 	}
 
 	land() {
