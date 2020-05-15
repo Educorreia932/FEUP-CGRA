@@ -29,7 +29,7 @@ class MyVehicle extends CGFobject {
         this.timeCounter = 0.0;
 
         this.material = new CGFappearance(this.scene);
-		this.material.setAmbient(0.1, 0.1, 0.1, 1);
+		this.material.setAmbient(0.3, 0.3, 0.3, 1);
         this.material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.material.setSpecular(0.1, 0.1, 0.1, 1);
         this.material.setShininess(10.0);
@@ -94,6 +94,7 @@ class MyVehicle extends CGFobject {
         this.pos = vec3.fromValues(0.0, 10.0, 0.0);
         this.velocity = 0.0;
         this.direction = 0.0;
+        this.oldTime = new Date().getTime();
     }
 
     turn(val) {

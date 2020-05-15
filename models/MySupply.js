@@ -56,7 +56,7 @@ class MySupply extends CGFobject {
 		var y = this.pos[1];
 		var z = this.pos[2];
 
-		var tSeconds = (t/1000.0) - this.oldTime/1000.0;
+		var tSeconds = (t/1000.0) - (this.oldTime/1000.0);
 		var left = 0;
 		
 		if(this.state == SupplyStates.FALLING) {
@@ -83,6 +83,7 @@ class MySupply extends CGFobject {
 		this.pos = vec3.fromValues(0.0, 0.0, 0.0);
 		this.speed = 0.0;
 		this.state = SupplyStates.INACTIVE;
+		this.timeCount = 0.0;
 	}
 
 	display() {
