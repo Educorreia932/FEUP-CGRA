@@ -55,6 +55,7 @@ class MyScene extends CGFscene {
         }
 
         this.nSupplies = 0;
+        this.deliveredSupplies = 0;
 
         this.appearance = new CGFappearance(this);
 		this.appearance.setAmbient(0.1, 0.1, 0.1, 1);
@@ -110,6 +111,7 @@ class MyScene extends CGFscene {
         for(var i = 0; i < 5; ++i) {
             this.supplies[i].update(t);
         }
+        this.billboard.updateSupplies();
     }
 
     checkKeys() {
@@ -147,9 +149,8 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyL")) {
             text+=" L ";
             if(this.nSupplies < 5) {
-                this.supplies[this.nSupplies].drop(this.vehicle.pos);
+                this.supplies[this.nSupplies].drop(this.vehicle.pos, this.vehicle.direction);
                 this.nSupplies++;
-                this.billboard.updateSupplies();
             }
             keysPressed=true;
         }
@@ -170,6 +171,7 @@ class MyScene extends CGFscene {
             this.supplies[i].reset();
         }
         this.nSupplies = 0;
+        this.deliveredSupplies = 0;
         this.billboard.reset();
     }
         

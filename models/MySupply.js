@@ -21,6 +21,8 @@ class MySupply extends CGFobject {
 
 		this.oldTime = 0.0;
 
+		this.orientation = 0.0;
+
 		
 		this.materialSide = new CGFappearance(this.scene);
 		this.materialSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -44,7 +46,8 @@ class MySupply extends CGFobject {
 		this.materialBottom.loadTexture('images/bigmac.jpg');	
 	}
 
-	drop(dropPosition) {
+	drop(dropPosition, orient) {
+		this.orientation = orient;
 		this.pos = dropPosition;
 		this.speed = (this.pos[1] - 0.01) / 3.0;
 		this.state = SupplyStates.FALLING;
@@ -76,6 +79,7 @@ class MySupply extends CGFobject {
 	land() {
 		if(this.pos[1] <= 0.1) {
 			this.state = SupplyStates.LANDED;
+			this.scene.deliveredSupplies++;
 		}
 	}
 
@@ -96,7 +100,7 @@ class MySupply extends CGFobject {
 	displayFall() {
 		this.scene.pushMatrix();
 		this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
-
+		this.scene.rotate(this.orientation, 0, 1, 0);
 
 		this.scene.pushMatrix(); 
 		this.scene.rotate(-Math.PI/2, 1, 0, 0);
@@ -151,6 +155,7 @@ class MySupply extends CGFobject {
 	displayLand() {
 		this.scene.pushMatrix();
 		this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
+		this.scene.rotate(this.orientation, 0, 1, 0);
 
 		this.scene.pushMatrix();
 		this.scene.translate(2, 0, 0);
