@@ -39,8 +39,9 @@ class MyScene extends CGFscene {
         ];
 
         this.objectList = {
-			'Cylinder': 0,
-            'Sphere': 1,
+            'None': 0,
+			'Cylinder': 1,
+            'Sphere': 2,
         }
 
         this.cubeIds = { 'Sky': 0, 'Test': 1};
@@ -74,10 +75,11 @@ class MyScene extends CGFscene {
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
         
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.numSlices = 6;
         this.selectedCube = 0;
         this.displayNormals = false;
+        this.vehicleScaleFactor = 1.0;
 
         this.testPlane = new MyPlane(this, 5, 0, 1 , 0 ,1);
     }
@@ -210,7 +212,6 @@ class MyScene extends CGFscene {
             this.vehicle.disableNormalViz();
 
         // ---- BEGIN Primitive drawing section
-
         this.vehicle.display();
 
         this.pushMatrix();
@@ -230,10 +231,16 @@ class MyScene extends CGFscene {
         this.billboard.display();
         this.popMatrix();
 
+        this.appearance.setTexture(this.earthTexture);
+        this.appearance.apply();
+
+        if(this.selectedObject != 0)
+            this.objects[this.selectedObject - 1].display();
+
         // ---- END Primitive drawing section
     }
 
     updateComplexity() {
-        this.objects[this.selectedObject].updateBuffers(this.numSlices);
+        this.objects[this.selectedObject - 1].updateBuffers(this.numSlices);
     }
 }

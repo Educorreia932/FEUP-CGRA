@@ -13,7 +13,6 @@ class MyVehicle extends CGFobject {
         this.direction = 0.0;
         this.speedFactor = 1.5;
         this.vehicleFriction = false;
-        this.scaleFactor = 1.0;
  
         this.rudder = new MyRudder(scene);
         this.gondola = new MyGondola(scene);
@@ -95,6 +94,7 @@ class MyVehicle extends CGFobject {
         this.velocity = 0.0;
         this.direction = 0.0;
         this.oldTime = new Date().getTime();
+        this.autoPilot = false;
     }
 
     turn(val) {
@@ -134,14 +134,14 @@ class MyVehicle extends CGFobject {
 
         this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
         this.scene.rotate(this.direction, 0, 1, 0);
-
+        this.scene.scale(this.scene.vehicleScaleFactor, this.scene.vehicleScaleFactor, this.scene.vehicleScaleFactor);
 
         //Balloon
         this.scene.pushMatrix();
         
         this.material.setTexture(this.balloonTexture);
         this.material.apply();
-        this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor * 2);
+        this.scene.scale(1, 1, 2);
         this.balloon.display();
 
         this.scene.popMatrix();
