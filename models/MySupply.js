@@ -29,21 +29,21 @@ class MySupply extends CGFobject {
         this.materialSide.setDiffuse(0.9, 0.9, 0.9, 1);
         this.materialSide.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialSide.setShininess(10.0);
-		this.materialSide.loadTexture('images/bigmac.jpg');		
+		this.materialSide.loadTexture('images/bigmac2.png');		
 		
 		this.materialTop = new CGFappearance(this.scene);
 		this.materialTop.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialTop.setDiffuse(0.9, 0.9, 0.9, 1);
         this.materialTop.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialTop.setShininess(10.0);
-		this.materialTop.loadTexture('images/bigmac.jpg');	
+		this.materialTop.loadTexture('images/bigmac2.png');	
 
 		this.materialBottom = new CGFappearance(this.scene);
 		this.materialBottom.setAmbient(0.1, 0.1, 0.1, 1);
         this.materialBottom.setDiffuse(0.9, 0.9, 0.9, 1);
         this.materialBottom.setSpecular(0.1, 0.1, 0.1, 1);
         this.materialBottom.setShininess(10.0);
-		this.materialBottom.loadTexture('images/bigmac.jpg');	
+		this.materialBottom.loadTexture('images/bigmac2.png');	
 	}
 
 	drop(dropPosition, orient) {
