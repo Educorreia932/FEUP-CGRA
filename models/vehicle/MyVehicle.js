@@ -34,7 +34,7 @@ class MyVehicle extends CGFobject {
         this.material.setShininess(10.0);
         
         this.balloonTexture = new CGFtexture(this.scene, "images/balloonTest1.png");
-        this.gondolaTexture = new CGFtexture(this.scene, "images/gondolaTexture.jpg");
+        
         this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
 
         this.windVelocity = 1.5;
@@ -180,8 +180,6 @@ class MyVehicle extends CGFobject {
         //Gondola, propellers
         this.scene.pushMatrix();
         //this.scene.translate(0, -4, 0);
-        this.material.setTexture(this.gondolaTexture);
-        this.material.apply();
         
         this.gondola.display();
 
