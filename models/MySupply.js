@@ -56,7 +56,7 @@ class MySupply extends CGFobject {
 
 	update(t) {
 		var x = this.pos[0];
-		var y = this.pos[1];
+		
 		var z = this.pos[2];
 
 		var tSeconds = (t/1000.0) - (this.oldTime/1000.0);
@@ -64,22 +64,26 @@ class MySupply extends CGFobject {
 		
 		if(this.state == SupplyStates.FALLING) {
 			this.timeCount += tSeconds;
+
+			
 			if(this.timeCount >= 3.0) {
 				left = this.timeCount - 3.0;
 				this.timeCount = 3.0;
 				this.land();
 			}
-
+			var y = this.pos[1];
 			y -= (tSeconds-left) * this.speed;
 			this.pos = vec3.fromValues(x, y, z);
+				
 		}
 		this.oldTime = t;	
 	}
 
 	land() {
 		if(this.pos[1] <= 0.1) {
+			//random small offset so the boxes don't clip on each other
+			this.pos = vec3.fromValues(this.pos[0], this.pos[1] + (Math.random()/100.0), this.pos[2]);
 			this.state = SupplyStates.LANDED;
-			this.scene.deliveredSupplies++;
 		}
 	}
 

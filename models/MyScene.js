@@ -59,7 +59,6 @@ class MyScene extends CGFscene {
         }
 
         this.nSupplies = 0;
-        this.deliveredSupplies = 0;
 
         this.appearance = new CGFappearance(this);
 		this.appearance.setAmbient(0.1, 0.1, 0.1, 1);
@@ -175,7 +174,6 @@ class MyScene extends CGFscene {
             this.supplies[i].reset();
         }
         this.nSupplies = 0;
-        this.deliveredSupplies = 0;
         this.billboard.reset();
     }
         
