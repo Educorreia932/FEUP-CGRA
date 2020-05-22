@@ -1,5 +1,5 @@
 class MyCubeMap extends CGFobject {
-	constructor(scene, nDivs) {
+	constructor(scene, nDivs, nTexture) {
 		super(scene);
         this.initBuffers();
         
@@ -8,11 +8,13 @@ class MyCubeMap extends CGFobject {
         this.nDivs = nDivs;
         this.patchLength = 1.0 / nDivs;
 
+        this.textures = ["images/cubemap.png", "images/testCubeMap.jpg"];
+
         this.material = new CGFappearance(this.scene);
         this.material.setAmbient(1.0, 1.0, 1.0, 1.0);
         this.material.setDiffuse(0.5, 0.5, 0.5, 0.5);
         this.material.setSpecular(0.0, 0.0, 0.0, 1.0);
-        this.texture = new CGFtexture(this.scene, "images/cubemap.png");
+        this.texture = new CGFtexture(this.scene, this.textures[nTexture]);
         this.material.setTexture(this.texture);
     }
     

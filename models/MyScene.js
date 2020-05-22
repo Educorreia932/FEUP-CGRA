@@ -43,7 +43,12 @@ class MyScene extends CGFscene {
             'Sphere': 1,
         }
 
+        this.cubeIds = { 'Sky': 0, 'Test': 1};
+
+        this.cubeMaps = [ new MyCubeMap(this, undefined, 0), new MyCubeMap(this, undefined, 1) ];
+
         this.cubeMap = new MyCubeMap(this);
+
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
         this.billboard = new MyBillboard(this);
@@ -71,7 +76,6 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.numSlices = 6;
-        this.cubeIds = { 'Montains': 0, 'Sky': 1};
         this.selectedCube = 0;
         this.displayNormals = false;
 
@@ -195,7 +199,7 @@ class MyScene extends CGFscene {
             this.axis.display();
 
         // Skybox
-        this.cubeMap.display();
+        this.cubeMaps[this.selectedCube].display();
 
         this.setDefaultAppearance();
 
