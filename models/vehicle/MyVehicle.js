@@ -33,7 +33,7 @@ class MyVehicle extends CGFobject {
         this.material.setSpecular(0.1, 0.1, 0.1, 1);
         this.material.setShininess(10.0);
         
-        this.balloonTexture = new CGFtexture(this.scene, "images/balloonTexture.jpg");
+        this.balloonTexture = new CGFtexture(this.scene, "images/balloonTest1.png");
         this.gondolaTexture = new CGFtexture(this.scene, "images/gondolaTexture.jpg");
         this.rudderTexture = new CGFtexture(this.scene, "images/rudderTexture.jpg");
 
