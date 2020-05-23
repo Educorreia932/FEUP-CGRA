@@ -221,7 +221,7 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.translate(-4, 0.5, -3);
-        this.rotate(Math.PI/3, 0, 1, 0);
+        this.rotate(Math.PI/4, 0, 1, 0);
         this.billboard.display();
         this.popMatrix();
 
