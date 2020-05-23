@@ -220,10 +220,8 @@ class MyScene extends CGFscene {
         }
 
         this.pushMatrix();
-        //this.translate(5, 10, 5);
-        //this.translate(6, 0.5, -15);
-        this.translate(18, 4, 5);
-        this.rotate(Math.PI/4, 0, 1, 0);
+        this.translate(-4, 0.5, -3);
+        this.rotate(Math.PI/3, 0, 1, 0);
         this.billboard.display();
         this.popMatrix();
 
