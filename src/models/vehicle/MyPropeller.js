@@ -22,7 +22,7 @@ class MyPropeller extends CGFobject {
     }
     
     update(vehicleVelocity) {
-        this.propellerAngle += 10 * vehicleVelocity;
+        this.propellerAngle += 10 * vehicleVelocity + 0.1;
     }
 
     display(num) {
