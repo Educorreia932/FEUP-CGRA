@@ -44,7 +44,7 @@ class MyScene extends CGFscene {
             'Sphere': 2,
         }
 
-        this.cubeIds = { 'Sky': 0, 'Test': 1};
+        this.cubeIds = { 'Sky': 0, 'Mountains' : 1,'Sky 2': 2, 'Test': 3};
 
         this.cubeMap = new MyCubeMap(this);
 
@@ -197,21 +197,18 @@ class MyScene extends CGFscene {
             this.axis.display();
 
         // Skybox
+        this.pushMatrix();
+        if(this.selectedCube == 1) 
+            this.translate(0, 4, 0);
         this.cubeMap.display();
+        this.popMatrix();
 
         this.setDefaultAppearance();
-
-        if (this.displayNormals)
-            this.vehicle.enableNormalViz();
-
-        else
-            this.vehicle.disableNormalViz();
-
+        
         // ---- BEGIN Primitive drawing section
         this.vehicle.display();
 
         this.pushMatrix();
-        this.translate(0, 0, 0);
         this.terrain.display();
         this.popMatrix();
 

@@ -8,7 +8,8 @@ class MyCubeMap extends CGFobject {
         this.nDivs = nDivs;
         this.patchLength = 1.0 / nDivs;
 
-        this.textures = [ new CGFtexture(this.scene, "images/cubemap.png"), new CGFtexture(this.scene, "images/testCubeMap.jpg")];
+        this.textures = [ new CGFtexture(this.scene, "images/cubemap.png"), new CGFtexture(this.scene, "images/cubemap2.jpg"), 
+                new CGFtexture(this.scene, "images/cubemap3.png"), new CGFtexture(this.scene, "images/testCubeMap.jpg")];
 
         this.material = new CGFappearance(this.scene);
         this.material.setAmbient(1.0, 1.0, 1.0, 1.0);
