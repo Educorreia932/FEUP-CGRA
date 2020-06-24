@@ -1,0 +1,81 @@
+\documentclass{report}
+
+\usepackage{graphicx} % Add pictures to your document
+\usepackage{float}
+
+\begin{document}
+
+\title{Formulário de CGRA}
+\maketitle{}
+
+\chapter{Modelos de iluminação local}
+\textbf{Reflexão difusa} - a luz reflete em todas as direções com intensidade definida pela rugosidade da superfície.\\
+\textbf{Reflexão especular} - depende da direção de observação.\\
+\textbf{Lei de Lambert} - a intensidade da luz refletida depende do ângulo de iluminação.\\
+\textbf{Atenuação atmosférica} - dada pela distância do observador ao objeto.\\
+
+\begin{equation}
+    I = I_a \times K_a + I_p * \left(\frac{K_d}{d + d_0} \times N.L + \frac{K_s}{d + d_0} \times (R.V)^n\right)
+\end{equation}
+
+\begin{itemize}
+    \itemsep0em 
+    \item $K$'s, variam de 0 a 1 e dependem do material;
+    \item $N$, normal à superfície;
+    \item $L$, direção da fonte de luz;
+    \item $R$, direção da reflexão perfeita;
+    \item $V$, direção do observador;
+    \item $V$, direção do observador;
+    \item $n$, depende da superfície. 1 para faces não polidas, 200 para faces perfeitamente polidas.
+    \item $d + d_0$, fator de atenuação. Se não for especificado, é 1. O real seria $d^2$ mas produz maus
+    resultados com a aproximação da iluminação ambiente.
+\end{itemize}
+
+\chapter{Shading and smooth shading}
+\section{Sombreamento constante}
+Calcula-se a iluminação local num ponto que der jeito (e.g.: vértice conhecido) e dizemos que
+os restantes pontos dessa face tem a mesma iluminação.\\
+\textbf{Efeito de Mach Band} - variação brusca de iluminação faz as zonas claras parecerem
+mais claras (e vice-versa).
+
+\section{Método de Gouraud}
+\begin{enumerate}
+\item Calcular a cor de cada vértice através do modelo de iluminação pretendido.
+\item Calcular a cor dos restantes pontos do polígono por interpolação bi-linear.
+\end{enumerate}
+\textbf{Interpolação bi-linear} - primeiro vertical depois horizontal.\\
+
+\begin{equation}
+    I_p = I_b - (I_b - I_a) \times \frac{y_b - y_p}{y_b - y_a}
+\end{equation}
+
+\textbf{Efeito de Mach Band} - existe nas descontinuidades da derivada. Convexidades sãoexageradas.\\
+\textbf{Nota} - não consegue ir buscar valores máximos de luz se tiverem no centro dos polígonos.
+
+\section{Método de Phong}
+Fazemos a interpolação bi-linear das normais na face (ficam aproximadamente iguais às reais).
+Consegue ir buscar valores máximos de luz que se encontram no centro de faces.\\
+\textbf{Efeito de Mach Band} - praticamente inexistente com este método.
+
+\chapter{Textures}
+\section{Mapeamento de texturas 2D}
+\begin{itemize}
+\item Um pixel numa textura é denominado por \textbf{texel}.
+\end{itemize}
+
+\chapter{Modelação de Sólidos}
+
+\begin{equation}
+    V – E + F – H = 2 (C – G)
+\end{equation}
+
+\begin{itemize}
+    \item $V$, vértices
+    \item $E$, arestas
+    \item $F$, faces
+    \item $H$, número de buracos nas faces
+    \item $G$, número de buracos que atravessam o objeto
+    \item $C$, número de partes do objeto
+\end{itemize}
+
+\end{document}
