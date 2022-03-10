@@ -1,11 +1,8 @@
-WebCGF2.ex1/lib/
+# WebCGF library
+lib/
 
 *.gz
-
 *.log
-
 *.fls
-
 *.fdb_latexmk
-
 *.aux
